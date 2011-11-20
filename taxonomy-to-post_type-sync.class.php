@@ -247,6 +247,10 @@ class Tax2PostTypeSync {
 	}
 	
 	function get_synced_term( $post_id, $post_type ) {
+		// In case we get passed in a whole post object
+		if ( is_object( $post_id ) )
+			$post_id = $post_id->ID;
+
 		$taxonomy = $this->get_post_type_sync( $post_type );
 		$terms = wp_get_object_terms( $post_id, $taxonomy );
 		
