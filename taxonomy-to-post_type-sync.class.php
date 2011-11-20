@@ -257,7 +257,10 @@ class Tax2PostTypeSync {
 	}
 	
 	function get_synced_post( $term_id, $taxonomy ) {
-		
+		// In case the term object was passed in
+		if ( is_object( $term_id ) )
+			$term_id = $term_id->term_id;
+
 		$post_type = $this->get_taxonomy_sync( $taxonomy );
 		
 		$posts = get_posts( array( 
